@@ -10,5 +10,9 @@ namespace SanelesRecipeApplication
     {
         // Creating an instance for the RecipeInformation Class
         RecipeInformation recipeInfo = new RecipeInformation();
+
+        
+
+        }
     }
 }
