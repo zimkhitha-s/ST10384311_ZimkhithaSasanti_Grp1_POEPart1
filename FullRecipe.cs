@@ -8,5 +8,7 @@ namespace SanelesRecipeApplication
 {
     internal class FullRecipe
     {
+        // Creating an instance for the RecipeInformation Class
+        RecipeInformation recipeInfo = new RecipeInformation();
     }
 }
