@@ -102,7 +102,8 @@ namespace SanelesRecipeApplication
             }
         }
 
-        // This Method handles the functionality of when a user wants to scale the ingredients
+        /* This Method handles the functionality of when a user wants to scale the ingredients 
+         quantity by a half */
         public void scaleRecipeByHalf()
         {
             for (int i = 0; i < recipeInfo.ingredientsQuantity.Length; i++)
@@ -110,5 +111,19 @@ namespace SanelesRecipeApplication
                 recipeInfo.ingredientsQuantity[i] = recipeInfo.ingredientsQuantity[i] / 2;
             }
         }
+
+        /* This Method handles the functionality of when a user wants to scale the ingredients 
+         quantity by doubling it */
+        public void scaleRecipeByDouble()
+        {
+            for (int i = 0; i < recipeInfo.ingredientsQuantity.Length; i++)
+            {
+                recipeInfo.ingredientsQuantity[i] = recipeInfo.ingredientsQuantity[i] * 2;
+            }
+        }
+
+        
+        }
     }
 }
+//**********************************************!!End of File!!*******************************************************//
