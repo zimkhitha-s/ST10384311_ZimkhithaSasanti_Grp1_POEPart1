@@ -35,6 +35,22 @@ namespace SanelesRecipeApplication
             }
         }
 
-
+        // A Method that populates the ingredient information for the recipe
+        public void ingredientsData()
+        {
+            for(int i = 0; i < recipeInfo.NumberOfIngredients; i++)
+            {
+                /* Asking the user for the name of the ingredients, quantity and unit of measurements
+                and adding to the recpective arrays */
+                Console.WriteLine("Please enter the name of your ingredient:");
+                string ingredientName = Console.ReadLine();
+                recipeInfo.ingredientsName[i] = ingredientName;
+                Console.WriteLine("Please enter in the quantity of your ingredient:");
+                string stringIngredientQuantity = Console.ReadLine();
+                recipeInfo.ingredientsQuantity[i] = Int32.Parse(stringIngredientQuantity);
+                Console.WriteLine("Please enter in the unit of measurement for this ingredient:");
+                string ingredientUnitOfMeasurement = Console.ReadLine();
+            }
+        }
     }
 }
