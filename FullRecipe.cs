@@ -11,6 +11,12 @@ namespace SanelesRecipeApplication
         // Creating an instance for the RecipeInformation Class
         RecipeInformation recipeInfo = new RecipeInformation();
 
+        private List<int> originalQuantities;
+        public FullRecipe()
+        {
+            originalQuantities = new List<int>();
+        }
+
         // A method that allows the user to enter in the details of a single recipe
         public void singleRecipeData()
         {
@@ -136,6 +142,39 @@ namespace SanelesRecipeApplication
             }
         }
 
+        // This Method to store original quantities
+        public void StoreOriginalQuantities()
+        {
+            // Copy the current quantities to originalQuantities
+            originalQuantities.Clear();
+            originalQuantities.AddRange(recipeInfo.ingredientsQuantity);
+        }
+
+        // This Method that allows the user to reset the values to the original ones
+        public void resetRecipeToOriginal()
+        {
+            // Check if originalQuantities is populated
+            if (originalQuantities.Count != recipeInfo.ingredientsQuantity.Count)
+            {
+                Console.WriteLine("Original quantities are not stored.");
+                return;
+            }
+
+            // Copy original quantities back to ingredientsQuantity
+            for (int i = 0; i < recipeInfo.ingredientsQuantity.Count; i++)
+            {
+                recipeInfo.ingredientsQuantity[i] = originalQuantities[i];
+            }
+        }
+
+        // This Method handles the functionality of clearing the data
+        public void clearRecipeData()
+        {
+            // Clear all lists
+            recipeInfo.ingredientsName.Clear();
+            recipeInfo.ingredientsQuantity.Clear();
+            recipeInfo.ingredientsUnitOfMeasurement.Clear();
+        }
     }
 }
 //**********************************************!!End of File!!*******************************************************//
