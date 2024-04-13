@@ -44,12 +44,13 @@ namespace SanelesRecipeApplication
                 and adding to the recpective arrays */
                 Console.WriteLine("Please enter the name of your ingredient:");
                 string ingredientName = Console.ReadLine();
-                recipeInfo.ingredientsName[i] = ingredientName;
+                recipeInfo.ingredientsName.Add(ingredientName);
                 Console.WriteLine("Please enter in the quantity of your ingredient:");
                 string stringIngredientQuantity = Console.ReadLine();
-                recipeInfo.ingredientsQuantity[i] = Int32.Parse(stringIngredientQuantity);
+                recipeInfo.ingredientsQuantity.Add(Int32.Parse(stringIngredientQuantity));
                 Console.WriteLine("Please enter in the unit of measurement for this ingredient:");
                 string ingredientUnitOfMeasurement = Console.ReadLine();
+                recipeInfo.ingredientsUnitOfMeasurement.Add(ingredientUnitOfMeasurement);
             }
         }
 
@@ -59,11 +60,12 @@ namespace SanelesRecipeApplication
             Console.WriteLine("Please enter in the number of Steps Description for your recipe:");
             recipeInfo.StepsDescription = Console.ReadLine();
             // Initializing the stepsDescriptionList Array and populating it
-            recipeInfo.stepsDescriptionList = new string[Int32.Parse(recipeInfo.StepsDescription)];
-            for(int i = 1; i <= recipeInfo.stepsDescriptionList.Length; i++) 
+            recipeInfo.stepsDescriptionList = new List <string>(Int32.Parse(recipeInfo.StepsDescription));
+            for(int i = 0; i < recipeInfo.stepsDescriptionList.Count; i++) 
             {
-                Console.WriteLine($"Step {i}: ");
-                recipeInfo.stepsDescriptionList[i] = Console.ReadLine();
+                Console.Write($"Step {i + 1}: ");
+                string stepDescription = Console.ReadLine();
+                recipeInfo.stepsDescriptionList.Add(stepDescription);
 
             }
         }
@@ -77,28 +79,30 @@ namespace SanelesRecipeApplication
             Console.WriteLine("The Ingrdients:");
             for(int i = 0; i < recipeInfo.NumberOfIngredients; i++)
             {
-                for(int j = 0; j < recipeInfo.ingredientsName.Length; j++)
+                // Check if the index is within the bounds of all lists
+                if (i < recipeInfo.ingredientsName.Count &&
+                    i < recipeInfo.ingredientsQuantity.Count &&
+                    i < recipeInfo.ingredientsUnitOfMeasurement.Count)
                 {
-                    for(int k = 0; k < recipeInfo.ingredientsQuantity.Length; k++)
-                    {
-                        for(int l = 0; l < recipeInfo.ingredientsUnitOfMeasurement.Length; l++)
-                        {
-                            Console.WriteLine($"Ingredient Name {j}: ");
-                            Console.Write(recipeInfo.ingredientsName[j] + " ");
-                            Console.Write(recipeInfo.ingredientsQuantity[k]);
-                            Console.Write(recipeInfo.ingredientsUnitOfMeasurement[l]);
-                        }
-                    }
+                    // Display ingredient information
+                    Console.WriteLine($"Ingredient {i + 1}: {recipeInfo.ingredientsName[i]} " +
+                        $"{recipeInfo.ingredientsQuantity[i]}" +
+                        $"{recipeInfo.ingredientsUnitOfMeasurement[i]}");
                 }
-                Console.WriteLine("");
+                else
+                {
+                    // Handle index out of bounds if needed
+                    Console.WriteLine("Index out of bounds for one or more ingredient lists.");
+                    break; // Exit the loop if index out of bounds
+                }
             }
+
             Console.WriteLine("The Steps:");
             Console.WriteLine("************************");
             // This for loop handles the displaying of the stepsDescriptionList array
-            for (int i = 0; i <= recipeInfo.stepsDescriptionList.Length; i++)
+            for (int i = 0; i < recipeInfo.stepsDescriptionList.Count; i++)
             {
-                Console.WriteLine($"Step {i}: ");
-                Console.Write(recipeInfo.stepsDescriptionList[i]);
+                Console.WriteLine($"Step {i + 1}: {recipeInfo.stepsDescriptionList[i]}");
             }
         }
 
@@ -106,9 +110,9 @@ namespace SanelesRecipeApplication
          quantity by a half */
         public void scaleRecipeByHalf()
         {
-            for (int i = 0; i < recipeInfo.ingredientsQuantity.Length; i++)
+            for (int i = 0; i < recipeInfo.ingredientsQuantity.Count; i++)
             {
-                recipeInfo.ingredientsQuantity[i] = recipeInfo.ingredientsQuantity[i] / 2;
+                recipeInfo.ingredientsQuantity[i] /= 2;
             }
         }
 
@@ -116,9 +120,9 @@ namespace SanelesRecipeApplication
          quantity by doubling it */
         public void scaleRecipeByDouble()
         {
-            for (int i = 0; i < recipeInfo.ingredientsQuantity.Length; i++)
+            for (int i = 0; i < recipeInfo.ingredientsQuantity.Count; i++)
             {
-                recipeInfo.ingredientsQuantity[i] = recipeInfo.ingredientsQuantity[i] * 2;
+                recipeInfo.ingredientsQuantity[i] *= 2;
             }
         }
 
@@ -126,36 +130,12 @@ namespace SanelesRecipeApplication
          quantity by tripling it*/
         public void scaleRecipeByTriple()
         {
-            for (int i = 0; i < recipeInfo.ingredientsQuantity.Length; i++)
+            for (int i = 0; i < recipeInfo.ingredientsQuantity.Count; i++)
             {
-                recipeInfo.ingredientsQuantity[i] = recipeInfo.ingredientsQuantity[i] * 3;
+                recipeInfo.ingredientsQuantity[i] *= 3;
             }
         }
 
-        public void resetRecipeToOriginal()
-        {
-            Console.WriteLine(recipeInfo.ingredientsQuantity);
-        }
-
-        public void clearRecipeData()
-        {
-            for (int i = 0; i < recipeInfo.NumberOfIngredients; i++)
-            {
-                for (int j = 0; j < recipeInfo.ingredientsName.Length; j++)
-                {
-                    for (int k = 0; k < recipeInfo.ingredientsQuantity.Length; k++)
-                    {
-                        for (int l = 0; l < recipeInfo.ingredientsUnitOfMeasurement.Length; l++)
-                        {
-                            Console.WriteLine($"Ingredient Name {j}: ");
-                            recipeInfo.ingredientsName[j] = Console.ReadLine(" ");
-                            Console.Write(recipeInfo.ingredientsQuantity[k]);
-                            Console.Write(recipeInfo.ingredientsUnitOfMeasurement[l]);
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 //**********************************************!!End of File!!*******************************************************//
