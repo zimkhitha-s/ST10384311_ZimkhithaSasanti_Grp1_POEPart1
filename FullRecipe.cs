@@ -67,5 +67,10 @@ namespace SanelesRecipeApplication
 
             }
         }
+
+        // A Method that displays the full recipe ingredients and steps for the user
+        public void displayFullRecipe()
+        {
+        }
     }
 }
