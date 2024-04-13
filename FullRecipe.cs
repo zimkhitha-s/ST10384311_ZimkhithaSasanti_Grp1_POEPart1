@@ -71,6 +71,35 @@ namespace SanelesRecipeApplication
         // A Method that displays the full recipe ingredients and steps for the user
         public void displayFullRecipe()
         {
+            Console.WriteLine("The Full Recipe");
+            Console.WriteLine("************************");
+            // This first nested for loop will display the ingredients name, quantity and unit of measurement
+            Console.WriteLine("The Ingrdients:");
+            for(int i = 0; i < recipeInfo.NumberOfIngredients; i++)
+            {
+                for(int j = 0; j < recipeInfo.ingredientsName.Length; j++)
+                {
+                    for(int k = 0; k < recipeInfo.ingredientsQuantity.Length; k++)
+                    {
+                        for(int l = 0; l < recipeInfo.ingredientsUnitOfMeasurement.Length; l++)
+                        {
+                            Console.WriteLine($"Ingredient Name {j}: ");
+                            Console.Write(recipeInfo.ingredientsName[j] + " ");
+                            Console.Write(recipeInfo.ingredientsQuantity[k]);
+                            Console.Write(recipeInfo.ingredientsUnitOfMeasurement[l]);
+                        }
+                    }
+                }
+                Console.WriteLine("");
+            }
+            Console.WriteLine("The Steps:");
+            Console.WriteLine("************************");
+            // This for loop handles the displaying of the stepsDescriptionList array
+            for (int i = 0; i <= recipeInfo.stepsDescriptionList.Length; i++)
+            {
+                Console.WriteLine($"Step {i}: ");
+                Console.Write(recipeInfo.stepsDescriptionList[i]);
+            }
         }
     }
 }
