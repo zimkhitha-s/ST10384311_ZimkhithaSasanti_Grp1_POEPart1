@@ -101,5 +101,11 @@ namespace SanelesRecipeApplication
                 Console.Write(recipeInfo.stepsDescriptionList[i]);
             }
         }
+
+        // This Method handles the functionality of when a user wants to scale the ingredients
+        public void scaleRecipe()
+        {
+
+        }
     }
 }
