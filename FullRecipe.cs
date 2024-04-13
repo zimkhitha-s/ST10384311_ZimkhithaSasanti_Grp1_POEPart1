@@ -132,7 +132,29 @@ namespace SanelesRecipeApplication
             }
         }
 
-        
+        public void resetRecipeToOriginal()
+        {
+            Console.WriteLine(recipeInfo.ingredientsQuantity);
+        }
+
+        public void clearRecipeData()
+        {
+            for (int i = 0; i < recipeInfo.NumberOfIngredients; i++)
+            {
+                for (int j = 0; j < recipeInfo.ingredientsName.Length; j++)
+                {
+                    for (int k = 0; k < recipeInfo.ingredientsQuantity.Length; k++)
+                    {
+                        for (int l = 0; l < recipeInfo.ingredientsUnitOfMeasurement.Length; l++)
+                        {
+                            Console.WriteLine($"Ingredient Name {j}: ");
+                            recipeInfo.ingredientsName[j] = Console.ReadLine(" ");
+                            Console.Write(recipeInfo.ingredientsQuantity[k]);
+                            Console.Write(recipeInfo.ingredientsUnitOfMeasurement[l]);
+                        }
+                    }
+                }
+            }
         }
     }
 }
