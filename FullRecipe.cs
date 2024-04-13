@@ -57,7 +57,7 @@ namespace SanelesRecipeApplication
         public void recipeSteps()
         {
             Console.WriteLine("Please enter in the number of Steps Description for your recipe:");
-
+            recipeInfo.StepsDescription = Console.ReadLine();
         }
     }
 }
