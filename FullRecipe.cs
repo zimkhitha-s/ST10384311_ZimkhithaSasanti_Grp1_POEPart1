@@ -122,6 +122,16 @@ namespace SanelesRecipeApplication
             }
         }
 
+        /* This Method handles the functionality of when a user wants to scale the ingredients 
+         quantity by tripling it*/
+        public void scaleRecipeByTriple()
+        {
+            for (int i = 0; i < recipeInfo.ingredientsQuantity.Length; i++)
+            {
+                recipeInfo.ingredientsQuantity[i] = recipeInfo.ingredientsQuantity[i] * 3;
+            }
+        }
+
         
         }
     }
