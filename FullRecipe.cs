@@ -58,6 +58,14 @@ namespace SanelesRecipeApplication
         {
             Console.WriteLine("Please enter in the number of Steps Description for your recipe:");
             recipeInfo.StepsDescription = Console.ReadLine();
+            // Initializing the stepsDescriptionList Array and populating it
+            recipeInfo.stepsDescriptionList = new string[Int32.Parse(recipeInfo.StepsDescription)];
+            for(int i = 1; i <= recipeInfo.stepsDescriptionList.Length; i++) 
+            {
+                Console.WriteLine($"Step {i}: ");
+                recipeInfo.stepsDescriptionList[i] = Console.ReadLine();
+
+            }
         }
     }
 }
