@@ -11,7 +11,7 @@ namespace SanelesRecipeApplication
         // The variables for the RecipeInformation Class
         public string recipeDetails;
         public int numberOfIngredients;
-        public string description;
+        public string stepsDescription;
         // The ingredientsName Array containing the names of the recipe ingredients
         public string[] ingredientsName;
         // The ingredientsQuantity Array containing the quantity for the recipe ingredients
@@ -34,10 +34,10 @@ namespace SanelesRecipeApplication
             get { return recipeDetails; }
         }
 
-        public string Description
+        public string StepsDescription
         {
-            set { description = value; }
-            get { return description; }
+            set { stepsDescription = value; }
+            get { return stepsDescription; }
         }
 
         // Creating a default RecipeInformation Constructor 

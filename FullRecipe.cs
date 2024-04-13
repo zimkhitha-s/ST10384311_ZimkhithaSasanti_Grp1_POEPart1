@@ -52,5 +52,12 @@ namespace SanelesRecipeApplication
                 string ingredientUnitOfMeasurement = Console.ReadLine();
             }
         }
+
+        // A Method that defines the steps for the recipe
+        public void recipeSteps()
+        {
+            Console.WriteLine("Please enter in the number of Steps Description for your recipe:");
+
+        }
     }
 }
