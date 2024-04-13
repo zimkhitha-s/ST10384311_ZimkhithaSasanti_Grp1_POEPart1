@@ -57,6 +57,11 @@ namespace SanelesRecipeApplication
         {
             for(int i = 0; i < recipeInfo.NumberOfIngredients; i++)
             {
+                // Inistalizing the Arrays
+                recipeInfo.ingredientsName = new string[recipeInfo.NumberOfIngredients];
+                recipeInfo.ingredientsQuantity = new double[recipeInfo.NumberOfIngredients];
+                recipeInfo.ingredientsUnitOfMeasurement = new string[recipeInfo.NumberOfIngredients];
+
                 /* Asking the user for the name of the ingredients, quantity and unit of measurements
                 and adding to the recpective arrays */
                 Console.WriteLine("Please enter the name of your ingredient:");
@@ -82,7 +87,7 @@ namespace SanelesRecipeApplication
             recipeInfo.StepsDescription = Console.ReadLine();
             // Initializing the stepsDescriptionList Array and populating it
             recipeInfo.stepsDescriptionArray = new string[Int32.Parse(recipeInfo.StepsDescription)];
-            for(int i = 1; i <= recipeInfo.stepsDescriptionArray.Length; i++) 
+            for(int i = 0; i < recipeInfo.stepsDescriptionArray.Length; i++) 
             {
                 Console.WriteLine($"Step {i}: ");
                 recipeInfo.stepsDescriptionArray[i] = Console.ReadLine();
