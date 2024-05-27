@@ -66,9 +66,9 @@ namespace SanelesRecipeApplication
             public void ingredientsData()
         {
             // Initializing the arrays
-            recipeInfo.ingredientsName = new string[recipeInfo.NumberOfIngredients];
-            recipeInfo.ingredientsQuantity = new double[recipeInfo.NumberOfIngredients];
-            recipeInfo.ingredientsUnitOfMeasurement = new string[recipeInfo.NumberOfIngredients];
+            recipeInfo.ingredientsName = new List<string>(recipeInfo.NumberOfIngredients);
+            recipeInfo.ingredientsQuantity = new List<double>(recipeInfo.NumberOfIngredients);
+            recipeInfo.ingredientsUnitOfMeasurement = new List<string>(recipeInfo.NumberOfIngredients);
             // For loop to populate array
             for (int i = 0; i < recipeInfo.NumberOfIngredients; i++)
             {
@@ -162,8 +162,8 @@ namespace SanelesRecipeApplication
 
             int.Parse(recipeInfo.stepsDescription = intStepsDescription.ToString());
             // Initializing the stepsDescription Array
-            recipeInfo.stepsDescriptionArray = new string[intStepsDescription];
-            for (int i = 0; i < recipeInfo.stepsDescriptionArray.Length; i++)
+            recipeInfo.stepsDescriptionArray = new List<string>(intStepsDescription);
+            for (int i = 0; i < recipeInfo.stepsDescriptionArray.Count; i++)
             {
                 Console.WriteLine($"Step {i + 1}: ");
                 recipeInfo.stepsDescription = Console.ReadLine();
@@ -183,7 +183,7 @@ namespace SanelesRecipeApplication
             // Displaying the ingrdients
             Console.WriteLine("The Ingredients:");
             Console.WriteLine("************************");
-            for (int i = 0; i < recipeInfo.ingredientsName.Length; i++)
+            for (int i = 0; i < recipeInfo.ingredientsName.Count; i++)
             {
                 Console.WriteLine($"{recipeInfo.ingredientsName[i]} {recipeInfo.ingredientsQuantity[i]}{recipeInfo.ingredientsUnitOfMeasurement[i]}");
             }
@@ -191,7 +191,7 @@ namespace SanelesRecipeApplication
             Console.WriteLine("");
             Console.WriteLine("The Steps:");
             Console.WriteLine("************************");
-            for (int i = 0; i < recipeInfo.stepsDescriptionArray.Length; i++)
+            for (int i = 0; i < recipeInfo.stepsDescriptionArray.Count; i++)
             {
                 Console.WriteLine($"Step {i + 1}: {recipeInfo.stepsDescriptionArray[i]}");
             }
@@ -235,15 +235,15 @@ namespace SanelesRecipeApplication
         public void resetRecipeToOriginal()
         {
             // Initializing the originalQuantities array 
-            originalQuantities = new double[recipeInfo.ingredientsQuantity.Length];
+            originalQuantities = new double[recipeInfo.ingredientsQuantity.Count];
             
-            if (originalQuantities.Length != recipeInfo.ingredientsQuantity.Length)
+            if (originalQuantities.Length != recipeInfo.ingredientsQuantity.Count)
             {
                 Console.WriteLine("Original quantities are not stored.");
                 return;
             }
             // Copying all the contents with in the ingredientsQuantity array into the originalQuantities array
-            for (int i = 0; i < recipeInfo.ingredientsQuantity.Length; i++)
+            for (int i = 0; i < recipeInfo.ingredientsQuantity.Count; i++)
             {
                 recipeInfo.ingredientsQuantity[i] = originalQuantities[i];
                 Console.ForegroundColor = ConsoleColor.Green;

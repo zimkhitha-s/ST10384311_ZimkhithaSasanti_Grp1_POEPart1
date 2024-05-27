@@ -13,13 +13,13 @@ namespace SanelesRecipeApplication
         public int numberOfIngredients;
         public string stepsDescription;
         // The ingredientsName Array containing the names of the recipe ingredients
-        public string[] ingredientsName;
+        public List<string> ingredientsName;
         // The ingredientsQuantity Array containing the quantity for the recipe ingredients
-        public double[] ingredientsQuantity;
+        public List<double> ingredientsQuantity;
         // The ingredientsUnitOfMeasurement Array containing the unit of measurement for the recipe ingredients
-        public string[] ingredientsUnitOfMeasurement;
+        public List<string> ingredientsUnitOfMeasurement;
         // The numberOfSteps Array containing the number of steps for the recipe
-        public string[] stepsDescriptionArray;
+        public List<string> stepsDescriptionArray;
 //********************************************************************************************************************//
         // The Getters and Setters for each variable
         public int NumberOfIngredients
