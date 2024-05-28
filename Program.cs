@@ -22,7 +22,7 @@ namespace SanelesRecipeApplication
         static void Main(string[] args)
         {
             // Instantiating the FullRecipe Class
-            FullRecipe recipe = new FullRecipe();
+            AddingRecipeInformation recipe = new AddingRecipeInformation();
 
             // Calling all the methods from FullRecipe Class accordingly
             recipe.singleRecipeData();

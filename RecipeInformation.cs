@@ -10,22 +10,29 @@ namespace SanelesRecipeApplication
     {
         // The variables for the RecipeInformation Class
         public string recipeDetails;
-        public int numberOfIngredients;
+        public string nameOfRecipe;
+        public string ingredientsName;
+        public double ingredientQuantity;
+        public string ingredientUnitOfMeasurement;
         public string stepsDescription;
-        // The ingredientsName Array containing the names of the recipe ingredients
-        public List<string> ingredientsName;
-        // The ingredientsQuantity Array containing the quantity for the recipe ingredients
-        public List<double> ingredientsQuantity;
-        // The ingredientsUnitOfMeasurement Array containing the unit of measurement for the recipe ingredients
-        public List<string> ingredientsUnitOfMeasurement;
-        // The numberOfSteps Array containing the number of steps for the recipe
-        public List<string> stepsDescriptionArray;
+        // The List containing the Recipe Details
+        public List<string> recipeDetailsList;
+        // The List containing the Recipe Names
+        public List<string> recipeNamesList;
+        // The List containing the names of the recipe ingredients
+        public List<string> ingredientsNameList;
+        // The List containing the quantity for the recipe ingredients
+        public List<double> ingredientsQuantityList;
+        // The List containing the unit of measurement for the recipe ingredients
+        public List<string> ingredientsUnitOfMeasurementList;
+        // The List containing the number of steps for the recipe
+        public List<string> stepsDescriptionArrayList;
 //********************************************************************************************************************//
         // The Getters and Setters for each variable
-        public int NumberOfIngredients
+        public string NameOfRecipe
         {
-            set { numberOfIngredients = value; }
-            get { return numberOfIngredients; }
+            set { nameOfRecipe = value; }
+            get { return nameOfRecipe; }
         }
 
         public string RecipeDetails
