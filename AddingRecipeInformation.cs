@@ -8,314 +8,197 @@ namespace SanelesRecipeApplication
 {
     internal class AddingRecipeInformation
     {
-        // Creating an instance of the RecipeInformation class
-        RecipeInformation recipeInfo = new RecipeInformation();
-        private double[] originalQuantities;
+        private RecipeInformation recipeInformation;
 
-        // Defining a List that stores all the Recipe Information thats entered by the user
-        public List<RecipeInformation> recipeInformationList = new List<RecipeInformation>();
-//********************************************************************************************************************//
-        // A method that allows the user to enter the name of the recipe
-        public void AddingRecipeNames()
+        // Constructor for AddingRecipeInformation class
+        public AddingRecipeInformation(RecipeInformation recipeInfo)
         {
-            // Initializing the recipeNamesList array
-            recipeInfo.recipeNamesList = new List<string>();
+            this.recipeInformation = recipeInfo;
+        }
 
-            // Displaying a welcoming message for the user
-            Console.WriteLine("Hey there, Welcome To Sanele's Recipe App!");
+        // Method to get Recipe Information from the user
+        public void GetRecipeInformation()
+        {
+            GetRecipeDetails();
+            GetIngredientsDetails();
+        }
 
-            // Asking the user to enter the name of the recipe
-            Console.WriteLine("Please enter the name of the Recipe:");
+        // A method that gets the Recipe Details from the user
+        public void GetRecipeDetails()
+        {
+            // Getting the Recipe Name from the user
+            Console.WriteLine("Please enter the Name of the Recipe: ");
+            string recipeName;
             do
             {
-                recipeInfo.NameOfRecipe = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(recipeInfo.NameOfRecipe))
+                recipeName = Console.ReadLine();
+                if (string.IsNullOrEmpty(recipeName))
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Recipe name cannot be empty. Please re-enter the correct name of the Recipe:");
-                    Console.ResetColor();
+                    Console.WriteLine("Recipe Name cannot be empty. Please enter a valid Recipe Name: ");
                 }
-            } while (string.IsNullOrWhiteSpace(recipeInfo.NameOfRecipe));
-            recipeInfo.recipeNamesList.Add(recipeInfo.NameOfRecipe);
-        }
-//********************************************************************************************************************//
-        // A method that allows the user to enter the details for a single recipe
-        public void AddingRecipeDetails()
-        {
-            // Initializing the recipeDetailsList array
-            recipeInfo.recipeDetailsList = new List<string>();
+            } while (string.IsNullOrEmpty(recipeName));
 
-            // Asking the user to enter the details for a single recipe
-            Console.WriteLine("Please enter in the details for this Recipe: ");
+            // Getting the Recipe Details from the user
+            Console.WriteLine("Please enter the Details of the Recipe: ");
+            string recipeDetails;
             do
             {
-                recipeInfo.RecipeDetails = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(recipeInfo.RecipeDetails))
+                recipeDetails = Console.ReadLine();
+                if (string.IsNullOrEmpty(recipeDetails))
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Recipe details cannot be empty. Please re-enter the correct details for a single Recipe:");
-                    Console.ResetColor();
+                    Console.WriteLine("Recipe Details cannot be empty. Please enter a valid Recipe Details: ");
                 }
-            } while (string.IsNullOrWhiteSpace(recipeInfo.RecipeDetails));
-            recipeInfo.recipeDetailsList.Add(recipeInfo.RecipeDetails);
-        }
-//********************************************************************************************************************//
-        // A method that allows the user to enter in the ingredients names for the recipe
-        public void AddingIngredientNames()
-        {
-            // Initializing the ingredientsNameList array
-            recipeInfo.ingredientsNameList = new List<string>();
+            } while (string.IsNullOrEmpty(recipeDetails));
 
-            // Asking the user to enter in the name of the ingredients
-            Console.WriteLine("Please enter the name of the ingredients for the recipe:");
+            // Adding RecipeDescription to the list
+            recipeInformation.RecipeList.Add(new RecipeDescription
+            {
+                RecipeName = recipeName,
+                RecipeDetails = recipeDetails
+            });
+        }
+
+        // A method that gets the Ingredients Details of the Recipe from the user
+        public void GetIngredientsDetails()
+        {
+            // Getting the Ingredients of the Recipe from the user
+            bool addMoreIngredients = true;
+            while (addMoreIngredients)
+            {
+                // Adding IngredientsDescription to the list
+                recipeInformation.IngredientsList.Add(new IngredientsDescription
+                {
+                    IngredientsName = GetIngredientsName(),
+                    IngredientsQuantity = GetIngredientsQuantity(),
+                    IngredientsUnitOfMeasurement = GetIngredientsUnitOfMeasurement(),
+                    IngredientsCalories = GetIngredientsCalories(),
+                    IngredientsFoodGroup = GetIngredientsFoodGroup(),
+                    IngredientsStepsDescription = GetIngredientsStepsDescription()
+                });
+                Console.WriteLine("Add another ingredient? (y/n)");
+                addMoreIngredients = Console.ReadLine().ToLower() == "y";
+            }
+
+            // Save the original state after adding the recipe
+            recipeInformation.SaveOriginalRecipeInformation();
+        }
+
+        // A method that gets the Ingredients Name from the user
+        public string GetIngredientsName()
+        {
+            // Getting the Ingredients Name from the user
+            Console.WriteLine("Enter the Ingredients Name: ");
+            string ingredientName;
             do
             {
-                recipeInfo.ingredientsName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(recipeInfo.ingredientsName))
+                ingredientName = Console.ReadLine();
+                if (string.IsNullOrEmpty(ingredientName))
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Ingredient name cannot be empty. Please re-enter the correct name of the ingredient:");
-                    Console.ResetColor();
+                    Console.WriteLine("Ingredients Name cannot be empty. Please enter a valid Ingredients Name: ");
                 }
-            } while (string.IsNullOrWhiteSpace(recipeInfo.ingredientsName));
-            recipeInfo.ingredientsNameList.Add(recipeInfo.ingredientsName);
+            } while (string.IsNullOrEmpty(ingredientName));
+            return ingredientName;
         }
-//********************************************************************************************************************//
-        // A method that allows the user to enter in the quantity for the ingredients
-        public void AddingIngredientQuantity()
-        {
-            // Initializing the ingredientsQuantityList array
-            recipeInfo.ingredientsQuantityList = new List<double>();
 
-            // Asking the user to enter in the quantity for the ingredients
-            Console.WriteLine("Please enter the quantity for the ingredients:");
-            string stringIngredientQuantity;
+        // A method that gets the Ingredients Quantity from the user
+        public double GetIngredientsQuantity()
+        {
+            // Getting the Ingredients Quantity from the user
+            Console.WriteLine("Enter the Ingredients Quantity: ");
+            double ingredientQuantity;
             do
             {
-                stringIngredientQuantity = Console.ReadLine();
-                if (!double.TryParse(stringIngredientQuantity, out recipeInfo.ingredientsQuantity))
+                if (!double.TryParse(Console.ReadLine(), out ingredientQuantity))
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter in the correct value for the quantity:");
-                    Console.ResetColor();
+                    Console.WriteLine("Invalid input. Please enter a valid Ingredients Quantity: ");
                 }
-            } while (!double.TryParse(stringIngredientQuantity, out recipeInfo.ingredientsQuantity));
-            recipeInfo.ingredientsQuantityList.Add(recipeInfo.ingredientsQuantity);
+                else if (ingredientQuantity <= 0)
+                {
+                    Console.WriteLine("Ingredients Quantity cannot be less than or equal to 0. Please enter a valid Ingredients Quantity: ");
+                }
+                else if (ingredientQuantity.Equals(null))
+                {
+                    Console.WriteLine("Ingredients Quantity cannot be empty. Please enter a valid Ingredients Quantity: ");
+                }
+            } while (!double.TryParse(Console.ReadLine(), out ingredientQuantity) || ingredientQuantity <= 0 || ingredientQuantity.Equals(null));
+            return ingredientQuantity;
         }
-//********************************************************************************************************************//
-        // A method that allows the user to enter in the unit of measurement for the ingredients
-        public void AddingIngredientUnitOfMeasurement()
-        {
-            // Initializing the ingredientsUnitOfMeasurementList array
-            recipeInfo.ingredientsUnitOfMeasurementList = new List<string>();
 
-            // Asking the user to enter in the unit of measurement for the ingredients
-            Console.WriteLine("Please enter the unit of measurement for the ingredients:");
+        // A method that gets the Ingredients Unit of Measurement from the user
+        public string GetIngredientsUnitOfMeasurement()
+        {
+            // Getting the Ingredients Unit of Measurement from the user
+            Console.WriteLine("Enter the Ingredients Unit of Measurement: ");
+            string ingredientUnit;
             do
             {
-                recipeInfo.ingredientsUnitOfMeasurement = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(recipeInfo.ingredientsUnitOfMeasurement))
+                ingredientUnit = Console.ReadLine();
+                if (string.IsNullOrEmpty(ingredientUnit))
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Unit of measurement cannot be empty. Please re-enter the correct unit of measurement:");
-                    Console.ResetColor();
+                    Console.WriteLine("Ingredients Unit of Measurement cannot be empty. Please enter a valid Ingredients Unit of Measurement: ");
                 }
-            } while (string.IsNullOrWhiteSpace(recipeInfo.ingredientsUnitOfMeasurement));
-            recipeInfo.ingredientsUnitOfMeasurementList.Add(recipeInfo.ingredientsUnitOfMeasurement);
+            } while (string.IsNullOrEmpty(ingredientUnit));
+            return ingredientUnit;
         }
-//********************************************************************************************************************//
-        // A method that checks if the ingredients quantity is 8
-        public bool CheckIngredientsQuantity()
+
+        // A method that gets the Ingredients Calories from the user
+        public double GetIngredientsCalories()
         {
-            bool result = false;
-
-            // Checking if the ingredients quantity is 8, if so, convert it to 1 cup
-            for (int i = 0; i < recipeInfo.ingredientsQuantityList.Count; i++)
-            {
-                if (recipeInfo.ingredientsQuantityList[i] == 8 && recipeInfo.ingredientsUnitOfMeasurementList[i] == "teaspoons")
-                {
-                    // Conversion found, update the values
-                    recipeInfo.ingredientsQuantityList[i] = 1;
-                    recipeInfo.ingredientsUnitOfMeasurementList[i] = "cup";
-
-                    // Log the conversion
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("The quantity of the ingredient has been changed to 1 cup.");
-                    Console.ResetColor();
-
-                    result = true;
-                }
-            }
-            return result;
-        }
-//********************************************************************************************************************//
-        // A method that allows the user to enter in the steps for the recipe
-        public void AddingStepsDescription()
-        {
-            // Initializing the stepsDescriptionArrayList array
-            recipeInfo.stepsDescriptionArrayList = new List<string>();
-
-            // Asking the user to enter in the steps for the recipe
-            Console.WriteLine("Please enter the steps description for the Recipe:");
+            // Getting the Ingredients Calories from the user
+            Console.WriteLine("Please enter the Ingredients Calories: ");
+            double ingredientCalories;
             do
             {
-                recipeInfo.ingredientsStepsDescription = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(recipeInfo.ingredientsStepsDescription))
+
+                if (!double.TryParse(Console.ReadLine(), out ingredientCalories))
                 {
-                    // Handling the case where the user enters an empty string
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Step description cannot be empty, please enter the number of Steps Description:");
+                    Console.WriteLine("Invalid input. Please enter a valid Ingredients Calories: ");
                 }
-            } while (string.IsNullOrWhiteSpace(recipeInfo.ingredientsStepsDescription));
-            recipeInfo.stepsDescriptionArrayList.Add(recipeInfo.ingredientsStepsDescription);
-        }
-//********************************************************************************************************************//
-        // A method that displays the full recipe
-        public void displayFullRecipe()
-        {
-            Console.WriteLine("");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("The Full Recipe");
-            Console.WriteLine("************************");
-            Console.WriteLine("");
-
-            // Displaying the ingrdients
-            Console.WriteLine("The Ingredients:");
-            Console.WriteLine("************************");
-            for (int i = 0; i < recipeInfo.ingredientsName.Count; i++)
-            {
-                Console.WriteLine($"{recipeInfo.ingredientsName[i]} {recipeInfo.ingredientsQuantity[i]}{recipeInfo.ingredientsUnitOfMeasurement[i]}");
-            }
-            // Displaying the steps
-            Console.WriteLine("");
-            Console.WriteLine("The Steps:");
-            Console.WriteLine("************************");
-            for (int i = 0; i < recipeInfo.stepsDescriptionArray.Count; i++)
-            {
-                Console.WriteLine($"Step {i + 1}: {recipeInfo.stepsDescriptionArray[i]}");
-            }
-            Console.WriteLine("");
-            Console.ResetColor();
-        }
-
-        // A method that scales the recipe accordingly
-        public void ScaleRecipe()
-        {
-            double scalingFactor;
-
-            // Prompt the user to enter the scaling factor and validate the input
-            while (true)
-            {
-                Console.WriteLine("Please enter a scaling factor by choosing one of these options (0,5; 2; 3):");
-
-                if (double.TryParse(Console.ReadLine(), out scalingFactor) && scalingFactor > 0)
+                else if (ingredientCalories <= 0)
                 {
-                    break;
+                    Console.WriteLine("Ingredients Calories cannot be less than or equal to 0. Please enter a valid Ingredients Calories: ");
                 }
-                else
+                else if (ingredientCalories.Equals(null))
                 {
-                    Console.WriteLine("Invalid scaling factor. Please enter a positive number.");
+                    Console.WriteLine("Ingredients Calories cannot be empty. Please enter a valid Ingredients Calories: ");
                 }
-            }
-
-            // Scale the quantities of ingredients
-            for (int i = 0; i < recipeInfo.NumberOfIngredients; i++)
-            {
-                recipeInfo.ingredientsQuantity[i] *= scalingFactor;
-            }
-
-            // Inform the user that the recipe has been scaled
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"The recipe has been scaled by a factor of {scalingFactor}.");
-            Console.ResetColor();
+            } while (!double.TryParse(Console.ReadLine(), out ingredientCalories) || ingredientCalories <= 0 || ingredientCalories.Equals(null));
+            return ingredientCalories;
         }
 
-        // A method that resets the recipe to its original value
-        public void resetRecipeToOriginal()
+        // A method that gets the Ingredients Food Group from the user
+        public string GetIngredientsFoodGroup()
         {
-            // Initializing the originalQuantities array 
-            originalQuantities = new double[recipeInfo.ingredientsQuantity.Count];
-            
-            if (originalQuantities.Length != recipeInfo.ingredientsQuantity.Count)
+            // Getting the Ingredients Food Group from the user
+            Console.WriteLine("Please enter the Ingredients Food Group: ");
+            string ingredientFoodGroup;
+            do
             {
-                Console.WriteLine("Original quantities are not stored.");
-                return;
-            }
-            // Copying all the contents with in the ingredientsQuantity array into the originalQuantities array
-            for (int i = 0; i < recipeInfo.ingredientsQuantity.Count; i++)
-            {
-                recipeInfo.ingredientsQuantity[i] = originalQuantities[i];
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("The recipe has been reset to its original value.");
-                Console.ResetColor();
-            }
-        }
-
-        public void clearRecipeData()
-        {
-            Console.WriteLine("Are you sure you want to clear all data? Choose one of the options below.\n" +
-                "1. Yes\n" +
-                "2. No");
-            string answer = Console.ReadLine();
-            if (answer == "1")
-            {
-                // Clears the data by taking the user back to the start and input a new recipe
-                Console.WriteLine("");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Please enter in a new recipe.");
-                Console.ResetColor();
-
-                singleRecipeData();
-                ingredientsData();
-                recipeSteps();
-                displayFullRecipe();
-            } else if(answer == "2")
-            {
-                return;
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice.");
-            }
-        }
-
-        // A method that displays the menu for the user to choose from
-        public void displayMenu()
-        {
-            while (true)
-            {
-                // Displaying options for the user to choose from and manipulate the recipe accordingly
-                Console.WriteLine("If you wish to scale the recipe, choose one of the options below:");
-                Console.WriteLine("*********************************************************************");
-                Console.WriteLine("1. Scale your Recipe");
-                Console.WriteLine("2. Set to Original Recipe");
-                Console.WriteLine("3. Clear Recipe and Add a new one");
-                Console.WriteLine("4. Exit");
-
-                string choice = Console.ReadLine();
-
-                switch (choice)
+                ingredientFoodGroup = Console.ReadLine();
+                if (string.IsNullOrEmpty(ingredientFoodGroup))
                 {
-                    case "1":
-                        ScaleRecipe();
-                        break;
-                    case "2":
-                        resetRecipeToOriginal();
-                        break;
-                    case "3":
-                        clearRecipeData();
-                        break;
-                    case "4":
-                        Environment.Exit(0);
-                        return; 
-                    default:
-                        Console.WriteLine("Invalid choice.");
-                        break;
+                    Console.WriteLine("Ingredients Food Group cannot be empty. Please enter a valid Ingredients Food Group: ");
                 }
-            }
+            } while (string.IsNullOrEmpty(ingredientFoodGroup));
+            return ingredientFoodGroup;
         }
 
-
+        // A method that gets the Ingredients Steps Description from the user
+        public string GetIngredientsStepsDescription()
+        {
+            // Getting the Ingredients Steps Description from the user
+            Console.WriteLine("Enter the Ingredients Steps Description: ");
+            string stepsDescription;
+            do
+            {
+                stepsDescription = Console.ReadLine();
+                if (string.IsNullOrEmpty(stepsDescription))
+                {
+                    Console.WriteLine("Ingredients Steps Description cannot be empty. Please enter a valid Ingredients Steps Description: ");
+                }
+            } while (string.IsNullOrEmpty(stepsDescription));
+            return stepsDescription;
+        }
     }
 }
 //**********************************************!!End of File!!*******************************************************//
