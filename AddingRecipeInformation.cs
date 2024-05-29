@@ -8,8 +8,12 @@ namespace SanelesRecipeApplication
 {
     internal class AddingRecipeInformation
     {
+        // Creating an instance of the RecipeInformation class
         RecipeInformation recipeInfo = new RecipeInformation();
         private double[] originalQuantities;
+
+        // Defining a List that stores all the Recipe Information thats entered by the user
+        public List<RecipeInformation> recipeInformationList = new List<RecipeInformation>();
 //********************************************************************************************************************//
         // A method that allows the user to enter the name of the recipe
         public void AddingRecipeNames()
@@ -89,14 +93,14 @@ namespace SanelesRecipeApplication
             do
             {
                 stringIngredientQuantity = Console.ReadLine();
-                if (!double.TryParse(stringIngredientQuantity, out recipeInfo.ingredientQuantity))
+                if (!double.TryParse(stringIngredientQuantity, out recipeInfo.ingredientsQuantity))
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Please enter in the correct value for the quantity:");
                     Console.ResetColor();
                 }
-            } while (!double.TryParse(stringIngredientQuantity, out recipeInfo.ingredientQuantity));
-            recipeInfo.ingredientsQuantityList.Add(recipeInfo.ingredientQuantity);
+            } while (!double.TryParse(stringIngredientQuantity, out recipeInfo.ingredientsQuantity));
+            recipeInfo.ingredientsQuantityList.Add(recipeInfo.ingredientsQuantity);
         }
 //********************************************************************************************************************//
         // A method that allows the user to enter in the unit of measurement for the ingredients
@@ -109,15 +113,15 @@ namespace SanelesRecipeApplication
             Console.WriteLine("Please enter the unit of measurement for the ingredients:");
             do
             {
-                recipeInfo.ingredientUnitOfMeasurement = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(recipeInfo.ingredientUnitOfMeasurement))
+                recipeInfo.ingredientsUnitOfMeasurement = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(recipeInfo.ingredientsUnitOfMeasurement))
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Unit of measurement cannot be empty. Please re-enter the correct unit of measurement:");
                     Console.ResetColor();
                 }
-            } while (string.IsNullOrWhiteSpace(recipeInfo.ingredientUnitOfMeasurement));
-            recipeInfo.ingredientsUnitOfMeasurementList.Add(recipeInfo.ingredientUnitOfMeasurement);
+            } while (string.IsNullOrWhiteSpace(recipeInfo.ingredientsUnitOfMeasurement));
+            recipeInfo.ingredientsUnitOfMeasurementList.Add(recipeInfo.ingredientsUnitOfMeasurement);
         }
 //********************************************************************************************************************//
         // A method that checks if the ingredients quantity is 8
@@ -145,76 +149,27 @@ namespace SanelesRecipeApplication
             return result;
         }
 //********************************************************************************************************************//
-        // A method that allows the user to enter in the number of steps for the recipe
+        // A method that allows the user to enter in the steps for the recipe
         public void AddingStepsDescription()
         {
             // Initializing the stepsDescriptionArrayList array
             recipeInfo.stepsDescriptionArrayList = new List<string>();
 
-            // Asking the user to enter in the number of steps for the recipe
-            Console.WriteLine("Please enter the number of steps description for the recipe:");
-            string stringStepsDescription;
-            int intStepsDescription;
+            // Asking the user to enter in the steps for the recipe
+            Console.WriteLine("Please enter the steps description for the Recipe:");
             do
             {
-                stringStepsDescription = Console.ReadLine();
-                if (!int.TryParse(stringStepsDescription, out intStepsDescription))
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter a valid number for the steps description:");
-                    Console.ResetColor();
-                }
-            } while (!int.TryParse(stringStepsDescription, out intStepsDescription));
-            recipeInfo.stepsDescriptionArrayList.Add(intStepsDescription.ToString());
-        }
-//********************************************************************************************************************//
-        // A method that asks the user to input the description for each step
-        public void recipeSteps()
-        {
-
-            // Asking the user to provide the number of steps description
-            Console.WriteLine("Please enter the number of Steps Description for your recipe:");
-            string input;
-            int intStepsDescription;
-            bool validInput = false;
-
-            do
-            {
-                input = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(input))
+                recipeInfo.ingredientsStepsDescription = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(recipeInfo.ingredientsStepsDescription))
                 {
                     // Handling the case where the user enters an empty string
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Step description cannot be empty, please enter the number of Steps Description:");
-                    Console.ResetColor();
                 }
-                else if (!int.TryParse(input, out intStepsDescription))
-                {
-                    // Handling the case where the user enters a non-integer value
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter a valid number for the steps description:");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    // Input is valid
-                    validInput = true;
-                }
-            } while (!validInput);
-            intStepsDescription = int.Parse(input);
-
-            int.Parse(recipeInfo.stepsDescription = intStepsDescription.ToString());
-            // Initializing the stepsDescription Array
-            recipeInfo.stepsDescriptionArray = new List<string>(intStepsDescription);
-            for (int i = 0; i < recipeInfo.stepsDescriptionArray.Count; i++)
-            {
-                Console.WriteLine($"Step {i + 1}: ");
-                recipeInfo.stepsDescription = Console.ReadLine();
-                recipeInfo.stepsDescriptionArray[i] = recipeInfo.stepsDescription;
-            }
+            } while (string.IsNullOrWhiteSpace(recipeInfo.ingredientsStepsDescription));
+            recipeInfo.stepsDescriptionArrayList.Add(recipeInfo.ingredientsStepsDescription);
         }
-
+//********************************************************************************************************************//
         // A method that displays the full recipe
         public void displayFullRecipe()
         {
